@@ -12,7 +12,15 @@
         <p>Sign up for free!</p>
       </Modal>
     </div>
+
+    <div v-if="showModalTwo">
+      <Modal @close="toggleModalTwo">
+        <h1>Sign up for the newsletter</h1>
+        <p>For promo codes!</p>
+      </Modal>
+    </div>
     <button @click.alt="toggleModal">open modal (alt)</button>
+    <button @click="toggleModalTwo">open modal</button>
   </div>
 </template>
 
@@ -27,14 +35,16 @@ export default {
   data() {
     return {
       title: 'Hello World!',
-      header: 'Sign up',
-      text: 'sign up for more!',
       showModal: false,
+      showModalTwo: false,
     };
   },
   methods: {
     toggleModal() {
       this.showModal = !this.showModal;
+    },
+    toggleModalTwo() {
+      this.showModalTwo = !this.showModalTwo;
     },
   },
 };
