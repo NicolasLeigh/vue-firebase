@@ -2,12 +2,21 @@ const app = Vue.createApp({
   // template: '<h2>Hello World!</h2>',
   data() {
     return {
+      url: 'https://www.google.com',
       showBooks: true,
-      title: 'The Final Empire',
-      author: 'Brandon Sanderson',
-      age: 45,
-      x: 0,
-      y: 0,
+      books: [
+        { title: 'name of the wind', author: 'patrick rothfuss', isFav: true },
+        {
+          title: 'name of the kings',
+          author: 'patrick sanderson',
+          isFav: false,
+        },
+        {
+          title: 'name of the empire',
+          author: 'patrick sanderson',
+          isFav: true,
+        },
+      ],
     };
   },
   methods: {
@@ -27,6 +36,14 @@ const app = Vue.createApp({
     handleMousemove(e) {
       this.x = e.offsetX;
       this.y = e.offsetY;
+    },
+    toggleFav(book) {
+      book.isFav = !book.isFav;
+    },
+  },
+  computed: {
+    filteredBooks() {
+      return this.books.filter((book) => book.isFav);
     },
   },
 });

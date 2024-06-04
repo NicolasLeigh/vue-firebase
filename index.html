@@ -5,13 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
-      .box {
-        padding: 100px 0;
-        width: 400px;
-        text-align: center;
-        background: #ddd;
-        margin: 20px;
-        display: inline-block;
+      body {
+        background: #eee;
+        max-width: 960px;
+        margin: 20px auto;
+      }
+      p,
+      h3,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        list-style-type: none;
+        background-color: #fff;
+        margin: 20px auto;
+        padding: 10px 20px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      li.fav {
+        background-color: aqua;
       }
     </style>
     <title>Vue</title>
@@ -19,8 +35,20 @@
   <body>
     <h1>Hello, Vue :)</h1>
     <div id="app">
+      <!-- attribute binding -->
+      <a :href="url">google</a>
+
       <div v-if="showBooks">
-        <p>{{title}} - {{author}} - {{age}}</p>
+        <ul>
+          <li
+            v-for="book in filteredBooks"
+            :class="{fav: book.isFav}"
+            @click="toggleFav(book)"
+          >
+            <h3>{{book.title}}</h3>
+            <p>{{book.author}}</p>
+          </li>
+        </ul>
       </div>
 
       <button @click="toggleShowBooks">
@@ -36,10 +64,10 @@
       <br />
 
       <!-- other mouse events -->
-      <div class="box" @mouseover="handleEvent($event, 5)">mouseover</div>
+      <!-- <div class="box" @mouseover="handleEvent($event, 5)">mouseover</div>
       <div class="box" @mouseleave="handleEvent">mouseleave</div>
       <div class="box" @dblclick="handleEvent">double click</div>
-      <div class="box" @mousemove="handleMousemove">position - {{x}} {{y}}</div>
+      <div class="box" @mousemove="handleMousemove">position - {{x}} {{y}}</div> -->
 
       <!-- <div v-show="showBooks">currently showing books</div> -->
     </div>
