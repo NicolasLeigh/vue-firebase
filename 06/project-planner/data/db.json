@@ -1,0 +1,10 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Create new homepage banner",
+      "details": "Create a new homepage banner for the website",
+      "complete": false
+    }
+  ]
+}
