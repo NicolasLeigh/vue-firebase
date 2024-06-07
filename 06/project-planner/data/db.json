@@ -4,6 +4,12 @@
       "id": 1,
       "title": "Create new homepage banner",
       "details": "Create a new homepage banner for the website",
+      "complete": true
+    },
+    {
+      "id": 2,
+      "title": "Update product images",
+      "details": "Update product images on the website",
       "complete": false
     }
   ]
