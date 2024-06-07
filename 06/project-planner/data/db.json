@@ -4,17 +4,17 @@
       "id": 1,
       "title": "Create new homepage banner",
       "details": "Create a new homepage banner for the website",
-      "complete": true
+      "complete": false
     },
     {
       "title": "Make new website",
-      "details": "hahaha",
+      "details": "ok!",
       "complete": true,
       "id": 3
     },
     {
       "title": "Design new website",
-      "details": "gogogog",
+      "details": "hello from go",
       "complete": true,
       "id": 4
     }
