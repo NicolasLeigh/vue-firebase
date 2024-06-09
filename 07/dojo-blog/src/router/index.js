@@ -6,7 +6,7 @@ import Create from "../views/Create.vue";
 const routes = [
   {
     path: "/",
-    name: "home",
+    name: "Home",
     component: HomeView,
   },
   {
