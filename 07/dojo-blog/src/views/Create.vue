@@ -17,7 +17,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { db } from "../firebase/config";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 export default {
   setup() {
     const title = ref("");
@@ -36,7 +36,12 @@ export default {
     };
 
     const handleSubmit = async () => {
-      const post = { title: title.value, body: body.value, tags: tags.value };
+      const post = {
+        title: title.value,
+        body: body.value,
+        tags: tags.value,
+        createdAt: Timestamp.now(),
+      };
       await addDoc(collection(db, "posts"), post);
       router.push({ name: "Home" });
     };
