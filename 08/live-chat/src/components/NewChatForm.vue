@@ -6,6 +6,7 @@
       @keypress.enter.prevent="handleSubmit"
     >
     </textarea>
+    <div class="error">{{ error }}</div>
   </form>
 </template>
 
@@ -13,9 +14,11 @@
 import { ref } from "vue";
 import getUser from "../composables/getUser";
 import { Timestamp } from "firebase/firestore";
+import useCollection from "../composables/useCollection";
 export default {
   setup() {
     const { user } = getUser();
+    const { addDocument, error } = useCollection("messages");
     const message = ref("");
 
     const handleSubmit = async () => {
@@ -24,11 +27,12 @@ export default {
         message: message.value,
         createdAt: Timestamp.now(),
       };
-      console.log(chat);
-      message.value = "";
+
+      await addDocument(chat);
+      if (!error.value) message.value = "";
     };
 
-    return { message, handleSubmit };
+    return { message, handleSubmit, error };
   },
 };
 </script>
