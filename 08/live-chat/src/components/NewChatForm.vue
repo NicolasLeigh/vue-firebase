@@ -13,7 +13,7 @@
 <script>
 import { ref } from "vue";
 import getUser from "../composables/getUser";
-import { Timestamp } from "firebase/firestore";
+import { serverTimestamp, Timestamp } from "firebase/firestore";
 import useCollection from "../composables/useCollection";
 export default {
   setup() {
@@ -25,7 +25,7 @@ export default {
       const chat = {
         name: user.value.displayName,
         message: message.value,
-        createdAt: Timestamp.now(),
+        createdAt: serverTimestamp(),
       };
 
       await addDocument(chat);
