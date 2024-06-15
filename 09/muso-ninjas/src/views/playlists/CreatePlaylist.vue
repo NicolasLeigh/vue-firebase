@@ -7,26 +7,47 @@
     <input type="file" @change="handleChange" />
     <div class="error">{{ fileError }}</div>
     <div class="error"></div>
-    <button>Create</button>
+    <button v-if="!isPending">Create</button>
+    <button v-else disabled>Saving</button>
   </form>
 </template>
 
 <script>
 import { ref } from "vue";
+import { serverTimestamp } from "firebase/firestore";
 import useStorage from "../../composables/useStorage";
+import useCollection from "../../composables/useCollection";
+import getUser from "../../composables/getUser";
 export default {
   setup() {
     const { filePath, url, uploadImage } = useStorage();
+    const { error, addDocument } = useCollection("playlists");
+    const { user } = getUser();
 
     const title = ref("");
     const description = ref("");
     const file = ref(null);
     const fileError = ref(null);
+    const isPending = ref(false);
 
     const handleSubmit = async () => {
       if (file.value) {
+        isPending.value = true;
         await uploadImage(file.value);
-        console.log("uploaded", url.value);
+        await addDocument({
+          title: title.value,
+          description: description.value,
+          userId: user.value.uid,
+          userName: user.value.displayName,
+          coverUrl: url.value,
+          filePath: filePath.value,
+          songs: [],
+          createdAt: serverTimestamp(),
+        });
+        isPending.value = false;
+        if (!error.value) {
+          console.log("playlist created successfully");
+        }
       }
     };
 
@@ -45,7 +66,7 @@ export default {
         fileError.value = "Please select an image file (png or jpg)";
       }
     };
-    return { title, description, handleSubmit, handleChange, fileError };
+    return { title, description, handleSubmit, handleChange, fileError, isPending };
   },
 };
 </script>
