@@ -11,8 +11,9 @@ const useCollection = (coll) => {
     isPending.value = true;
 
     try {
-      await addDoc(collection(db, coll), doc);
+      const res = await addDoc(collection(db, coll), doc);
       isPending.value = false;
+      return res;
     } catch (err) {
       console.log(err.message);
       error.value = "could not send the message";
