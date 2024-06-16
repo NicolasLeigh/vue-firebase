@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "vue-firebase-407bf"
-  }
+  },
+  "targets": {
+    "vue-firebase-407bf": {
+      "storage": {
+        "main": [
+          "vue-firebase-407bf"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
