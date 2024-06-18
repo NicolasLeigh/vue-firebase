@@ -21,6 +21,7 @@ import CreateBookForm from "@/components/CreateBookForm";
 import { db } from "../firebase/config";
 import { collection, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import getCollection from "../composables/getCollection";
+import getUser from "../composables/getUser";
 
 export default {
   name: "Home",
@@ -38,7 +39,8 @@ export default {
     //   books.value = docs;
     // });
 
-    const { documents: books } = getCollection("books");
+    const { user } = getUser();
+    const { documents: books } = getCollection("books", ["userUid", "==", user.value.uid]);
 
     const handleDelete = (book) => {
       const docRef = doc(db, "books", book.id);
