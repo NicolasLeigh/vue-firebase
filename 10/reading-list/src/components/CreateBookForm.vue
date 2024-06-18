@@ -14,8 +14,8 @@
 
 <script>
 import { ref } from "vue";
-import { collection } from "firebase/firestore";
-import db from "../firebase/config";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase/config";
 
 export default {
   setup() {

@@ -25,13 +25,20 @@
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/config";
 import getUser from "../composables/getUser";
+import { useRouter } from "vue-router";
+import { watchEffect } from "vue";
 export default {
   setup() {
     const { user } = getUser();
+    const router = useRouter();
 
     const handleClick = () => {
       signOut(auth);
     };
+
+    watchEffect(() => {
+      if (!user.value) router.push("/login");
+    });
 
     return { handleClick, user };
   },
